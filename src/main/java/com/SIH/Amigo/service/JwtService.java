@@ -1,10 +1,13 @@
 package com.SIH.Amigo.service;
 
+import com.SIH.Amigo.model.Role;
 import com.SIH.Amigo.model.Users;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,9 @@ import java.util.function.Function;
 public class JwtService {
 
     private String secretKey = "";
+
+    @Autowired
+    private HttpServletRequest request;
 
     public JwtService()
     {
@@ -91,5 +97,4 @@ public class JwtService {
         Claims claims = extractAllClaims(token);
         return claims.get("role", String.class);
     }
-
 }
